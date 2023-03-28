@@ -3,6 +3,8 @@ package com.fourheads.bookstore.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
+import org.hibernate.validator.constraints.Length;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
@@ -11,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 public class Livro implements Serializable{
@@ -20,8 +23,14 @@ public class Livro implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@NotEmpty(message =  "Campo Titulo nao pode ser nulo nem vazio!")
+	@Length(min = 3, max = 100, message = "Minimo 3 caracteres e no maximo 100 caracteres.")
 	private String titulo;
-	private String nomeAutor;
+	@NotEmpty(message =  "Campo Nome do Autor nao pode ser nulo nem vazio!")
+	@Length(min = 3, max = 200, message = "Minimo 3 caracteres e no maximo 200 caracteres.")
+	private String nomeAutor;	
+	@NotEmpty(message =  "Campo Texto nao pode ser nulo nem vazio!")
+	@Length(min = 3, max = 1200, message = "Minimo 3 caracteres e no maximo 1200 caracteres.")
 	private String texto;
 
 	@JsonIgnore

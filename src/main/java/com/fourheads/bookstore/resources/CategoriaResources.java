@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,9 @@ import com.fourheads.bookstore.domain.Categoria;
 import com.fourheads.bookstore.dto.CategoriasDto;
 import com.fourheads.bookstore.service.CategoriaService;
 
+import jakarta.validation.Valid;
+
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/categorias")
 public class CategoriaResources {
@@ -47,7 +51,7 @@ public class CategoriaResources {
 	
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public ResponseEntity<Categoria> adicionar(@RequestBody Categoria categoria) {
+	public ResponseEntity<Categoria> adicionar(@Valid @RequestBody Categoria categoria) {
 		categoria = categoriaService.salvar(categoria);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -58,7 +62,7 @@ public class CategoriaResources {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<CategoriasDto> update(@PathVariable Integer  id, @RequestBody CategoriasDto dto){
+	public ResponseEntity<CategoriasDto> update(@PathVariable Integer  id, @Valid @RequestBody CategoriasDto dto){
 		Categoria novaCategoria = categoriaService.update(id, dto);
 		return ResponseEntity.ok().body(new CategoriasDto(novaCategoria));
 	}

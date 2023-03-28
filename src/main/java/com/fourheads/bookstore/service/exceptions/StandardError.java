@@ -1,15 +1,15 @@
 package com.fourheads.bookstore.service.exceptions;
 
-public class StanderError {
+public class StandardError {
 
 	private Long timesTamp;
 	private Integer statusCode;
 	private String message;
 	
-	public StanderError() {
+	public StandardError() {
 		super();
 	}
-	public StanderError(Long timesTamp, Integer statusCode, String message) {
+	public StandardError(Long timesTamp, Integer statusCode, String message) {
 		super();
 		this.timesTamp = timesTamp;
 		this.statusCode = statusCode;
