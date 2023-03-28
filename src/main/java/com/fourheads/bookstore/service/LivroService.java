@@ -56,11 +56,12 @@ public class LivroService {
 	}
 
 	public void delete(Integer id) {
-		findById(id);
 		try {
-			livroCategory.deleteById(id);
+			Livro liv = findById(id);
+			livroCategory.delete(liv);
 		}catch ( DataIntegrityViolationException e) {
 			throw new com.fourheads.bookstore.service.exceptions.DataIntegrityViolationException("Livro não pode ser deletado, possui livros associados.");
 		}
 	}
+	
 }
